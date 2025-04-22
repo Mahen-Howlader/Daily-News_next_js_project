@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-
+import { IoMenuSharp } from "react-icons/io5";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -19,12 +19,13 @@ import { Button } from "@/components/ui/button"
 
 function Navbar() {
   return (
-    <header>
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+    <header className="shadow-2xl ">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-2">
         <div>
-          <Link href="/">Daily News</Link>
+          <Link className="text-xl font-bold" href="/">Daily News</Link>
         </div>
-        <NavigationMenu>
+        {/* desktop menu */}
+        <NavigationMenu className="hidden lg:block">
           <NavigationMenuList className="">
             <NavigationMenuLink href="/news">News</NavigationMenuLink>
             <NavigationMenuItem>
@@ -46,16 +47,21 @@ function Navbar() {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuLink href="/about" className={"hover:text-red-500"}>About</NavigationMenuLink>
-            <NavigationMenuLink href="/contactus">Contact Us</NavigationMenuLink>
+            <NavigationMenuLink href="/contact">Contact Us</NavigationMenuLink>
 
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="flex items-center space-x-4">
-        <div className="flex items-center space-x-5">
-          <span>Dark Mode</span>
-          <Switch />
-        </div>
+        {/* Color switcher and login button */}
+        <div className="hidden lg:flex items-center space-x-4">
+          <div className="flex items-center space-x-5">
+            <small className="font-semibold">Dark Mode</small>
+            <Switch />
+          </div>
           <Button variant="default">Login</Button>
+        </div>
+        {/* mobile hamber menu */}
+        <div className="lg:hidden">
+          <IoMenuSharp size={30} />
         </div>
       </nav>
     </header>
