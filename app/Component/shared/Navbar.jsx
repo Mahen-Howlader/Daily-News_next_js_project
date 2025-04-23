@@ -1,8 +1,6 @@
 "use client"
-
 import * as React from "react"
 import Link from "next/link"
-import { IoMenuSharp } from "react-icons/io5";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -15,9 +13,13 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Switch } from "@/components/ui/switch"
 import { Button } from "@/components/ui/button"
+import Mobilemenu from "./Mobilemenu";
+import { usePathname } from "next/navigation"
 
 
 function Navbar() {
+  const pathName = usePathname();
+  console.log(pathName)
   return (
     <header className="shadow-2xl ">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-2">
@@ -27,7 +29,7 @@ function Navbar() {
         {/* desktop menu */}
         <NavigationMenu className="hidden lg:block">
           <NavigationMenuList className="">
-            <NavigationMenuLink href="/news">News</NavigationMenuLink>
+            <NavigationMenuLink className={`${pathName === "/news" ? "text-red-600" : ""}`} href="/news">News</NavigationMenuLink>
             <NavigationMenuItem>
               <NavigationMenuTrigger>Service</NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -46,8 +48,8 @@ function Navbar() {
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
-            <NavigationMenuLink href="/about" className={"hover:text-red-500"}>About</NavigationMenuLink>
-            <NavigationMenuLink href="/contact">Contact Us</NavigationMenuLink>
+            <NavigationMenuLink className={`${pathName === "/about" ? "text-red-600" : ""}`} href="/about" >About</NavigationMenuLink>
+            <NavigationMenuLink className={`${pathName === "/contact" ? "text-red-600" : ""}`} href="/contact">Contact Us</NavigationMenuLink>
 
           </NavigationMenuList>
         </NavigationMenu>
@@ -60,9 +62,7 @@ function Navbar() {
           <Button variant="default">Login</Button>
         </div>
         {/* mobile hamber menu */}
-        <div className="lg:hidden">
-          <IoMenuSharp size={30} />
-        </div>
+        <Mobilemenu></Mobilemenu>
       </nav>
     </header>
   )
